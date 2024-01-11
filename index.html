@@ -7,7 +7,7 @@
 <body>
   <h1>Login Page</h1>
 
-  <form id="loginForm">
+  <form id="loginForm" onsubmit="login(event)">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required><br><br>
     <label for="password">Password:</label>
@@ -19,6 +19,27 @@
   <button onclick="uploadMainSave()">Upload LocalStorage</button>
 
   <script>
+    var passwords = {
+      "user1": "password1",
+      "user2": "password2",
+      "user3": "password3"
+    };
+
+    function login(event) {
+      event.preventDefault();
+      var usernameInput = document.getElementById("username");
+      var passwordInput = document.getElementById("password");
+      var username = usernameInput.value;
+      var password = passwordInput.value;
+
+      if (passwords.hasOwnProperty(username) && passwords[username] === password) {
+        // Successful login, redirect to dashboard.html
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Invalid username or password");
+      }
+    }
+
     function getMainSave() {
       var mainSave = {};
 
